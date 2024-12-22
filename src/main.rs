@@ -1,6 +1,10 @@
 mod days;
 fn main() {
-    let day1 = days::ChristmasSaver{};
-    println!("{}", day1.get_list_distance());
-    println!("{}", day1.get_similarity_score());
+    let day = days::ChristmasSaver{};
+    println!("Day 1: ===");
+    println!("{}", day.get_list_distance());
+    println!("{}", day.get_similarity_score());
+
+    println!("Day 2: ===");
+    println!("{}", day.count_safe_reports());
 }
