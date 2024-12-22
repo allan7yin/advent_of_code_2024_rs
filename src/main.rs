@@ -7,4 +7,5 @@ fn main() {
 
     println!("Day 2: ===");
     println!("{}", day.count_safe_reports());
+    println!("{}", day.count_safe_reports_tol());
 }
