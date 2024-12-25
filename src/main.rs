@@ -16,4 +16,7 @@ fn main() {
     println!("Day 5: ===");
     println!("{}", day.get_med_valid_updates());
     println!("{}", day.get_med_postfix());
+
+    println!("Day 6: ===");
+    println!("{}", day.count_visited_cells());
 }
