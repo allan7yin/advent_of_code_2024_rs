@@ -19,4 +19,5 @@ fn main() {
 
     println!("Day 6: ===");
     println!("{}", day.count_visited_cells());
+    println!("{}", day.count_cycle_blocks());
 }
