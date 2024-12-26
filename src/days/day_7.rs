@@ -27,7 +27,7 @@ impl ChristmasSaver {
         let eqs = read_rows_7();
         for (key, value) in eqs {
             let result = Self::add_operators(&value, key);
-            if !result.is_empty() {
+            if result > 0 {
                 sum += key;
             }
         }
@@ -35,32 +35,65 @@ impl ChristmasSaver {
         sum
     }
 
-    pub fn add_operators(nums: &Vec<i64>, target: i64) -> Vec<String> {
-        let mut combinations = vec![];
+    pub fn find_poss_calibrations_2(&self) -> i64 {
+        let mut sum = 0;
+        let eqs = read_rows_7();
+        for (key, value) in eqs {
+            let result = Self::add_operators_2(&value, key);
+            if result > 0 {
+                sum += key;
+            }
+        }
+
+        sum
+    }
+
+    pub fn add_operators(nums: &Vec<i64>, target: i64) -> i64 {
+        let mut combinations: i64 = 0;
         let mut result = nums[0].to_string();
         Self::f(1, &nums, target, &mut result, nums[0], &mut combinations);
 
         combinations
     }
 
-    fn f(i: usize, nums: &Vec<i64>, target: i64, result: &mut String, sum: i64, combinations: &mut Vec<String>) {
+    pub fn add_operators_2(nums: &Vec<i64>, target: i64) -> i64{
+        let mut combinations: i64 = 0;
+        let mut result = nums[0].to_string();
+        Self::f2(1, &nums, target, &mut result, nums[0], &mut combinations);
+
+        combinations
+    }
+
+
+    fn f(i: usize, nums: &Vec<i64>, target: i64, result: &mut String, sum: i64, combinations: &mut i64) {
         if i == nums.len() {
             if sum == target {
-                combinations.push(result.clone());
+                *combinations += 1;
             }
             return;
         }
 
-        result.push_str("+");
-        result.push_str(&nums[i].to_string());
         Self::f(i + 1, nums, target, result, sum + nums[i], combinations);
-        result.pop();
-        result.pop();
-
-        result.push_str("*");
-        result.push_str(&nums[i].to_string());
         Self::f(i + 1, nums, target, result, sum * nums[i], combinations);
-        result.pop();
-        result.pop();
+    }
+
+    fn f2(i: usize, nums: &Vec<i64>, target: i64, result: &mut String, sum: i64, combinations: &mut i64) {
+        if i == nums.len() {
+            if sum == target {
+                *combinations += 1;
+            }
+            return;
+        }
+
+        // +
+        Self::f2(i + 1, nums, target, result, sum + nums[i], combinations);
+
+        // ||
+        let digits = nums[i].to_string().len() as u32;
+        let concatenated = sum * 10_i64.pow(digits) + nums[i];
+        Self::f2(i + 1, nums, target, result, concatenated, combinations);
+        
+        // *
+        Self::f2(i + 1, nums, target, result, sum * nums[i], combinations);
     }
 }

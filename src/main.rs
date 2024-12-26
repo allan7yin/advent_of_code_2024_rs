@@ -23,4 +23,5 @@ fn main() {
 
     println!("Day 7: ===");
     println!("{}", day.find_poss_calibrations());
+    println!("{}", day.find_poss_calibrations_2());
 }
