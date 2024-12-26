@@ -18,6 +18,9 @@ fn main() {
     println!("{}", day.get_med_postfix());
 
     println!("Day 6: ===");
-    println!("{}", day.count_visited_cells());
-    println!("{}", day.count_cycle_blocks());
+    // println!("{}", day.count_visited_cells());
+    // println!("{}", day.count_cycle_blocks());
+
+    println!("Day 7: ===");
+    println!("{}", day.find_poss_calibrations());
 }
